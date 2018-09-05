@@ -139,7 +139,11 @@ export default {
       validator (value) {
         return value >= 0 && value <= 1
       }
-    }
+	},
+	elScroll: {
+	  type: [Boolean, String],
+	  default: false
+	}
   },
   components: {
     Resizer
@@ -202,15 +206,15 @@ export default {
     if (this.isAutoHeight) {
       /**
        * MutationObserver feature detection:
-       * 
+       *
        * Detects if MutationObserver is available, return false if not.
        * No polyfill is provided here, so height 'auto' recalculation will
        * simply stay at its initial height (won't crash).
        * (Provide polyfill to support IE < 11)
-       * 
+       *
        * https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
-       * 
-       * For the sake of SSR, MutationObserver cannot be initialized 
+       *
+       * For the sake of SSR, MutationObserver cannot be initialized
        * before component creation >_<
        */
       const MutationObserver = getMutationObserver()
@@ -418,6 +422,13 @@ export default {
         return
       }
 
+	  let elScroll = (this.elScroll) ? document.getElementById(this.elScroll) : null;
+	  if (elScroll) {
+		  elScroll.style.paddingRight = visible
+			? "0px"
+			: window.innerWidth - document.documentElement.clientWidth + "px";
+	  }
+
       const beforeEventName = visible
         ? 'before-close'
         : 'before-open'
@@ -523,7 +534,7 @@ export default {
             ? event.touches[0]
             : event
         }
-        
+
         const handleDraggableMousedown = event => {
           let target = event.target
 
@@ -551,7 +562,7 @@ export default {
 
           this.shift.left = cachedShiftX + clientX - startX
           this.shift.top = cachedShiftY + clientY - startY
- 
+
           event.preventDefault()
         }
 
