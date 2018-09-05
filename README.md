@@ -276,7 +276,7 @@ There is also a ssr build with css file extracted. Take a look in /dist folder.
 | maxHeight | false | Number (px)      | Infinity    | The maximum height of the modal (if the value is greater than window height, window height will be used instead |
 | pivotX    | false | Number (0 - 1.0) | 0.5         | Horizontal position in %, default is 0.5 (meaning that modal box will be in the middle (50% from left) of the window |
 | pivotY    | false | Number (0 - 1.0) | 0.5         | Vertical position in %, default is 0.5 (meaning that modal box will be in the middle (50% from top) of the window |
-| elScroll  | false | [Boolean, String] | false      | Soon =) |
+| elScroll  | false | [Boolean, String] | false      | Add right-padding (being equal to the scroll width) for the indicated element (to be used when the window is jumping as for the width) |
 | root      | false | Vue instance     | null        | Root instance to obtain modal container from. This property is only necessary when using dynamic modals with more than one root instance, which is uncommon |
 
 ### Events
