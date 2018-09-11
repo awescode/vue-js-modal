@@ -446,7 +446,7 @@
             beforeDestroy: function() {
                 _index2.default.event.$off("toggle", this.handleToggleEvent), window.removeEventListener("resize", this.handleWindowResize), 
                 this.clickToClose && window.removeEventListener("keyup", this.handleEscapeKeyUp), 
-                this.scrollable && document.body.classList.remove("v--modal-block-scroll");
+                this.scrollable && document.body.classList.remove("v--modal-block-scroll"), document.body.classList.remove("v--modal-block-is-scrollable");
             },
             computed: {
                 isAutoHeight: function() {
@@ -589,7 +589,11 @@
                 },
                 removeDraggableListeners: function() {},
                 updateRenderedHeight: function() {
-                    this.$refs.modal && (this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height);
+                    if (this.$refs.modal) {
+                        var overlay = document.getElementsByClassName("v--modal-overlay")[0];
+                        overlay && overlay.offsetWidth != overlay.clientWidth ? document.body.classList.add("v--modal-block-is-scrollable") : document.body.classList.remove("v--modal-block-is-scrollable"), 
+                        this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height;
+                    }
                 },
                 connectObserver: function() {
                     this.mutationObserver && this.mutationObserver.observe(this.$refs.overlay, {

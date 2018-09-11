@@ -246,6 +246,7 @@ export default {
     if (this.scrollable) {
       document.body.classList.remove('v--modal-block-scroll')
     }
+	document.body.classList.remove('v--modal-block-is-scrollable');
   },
   computed: {
     /**
@@ -594,6 +595,12 @@ export default {
      */
     updateRenderedHeight () {
       if (this.$refs.modal) {
+		let overlay = document.getElementsByClassName('v--modal-overlay')[0];
+		if (overlay && overlay.offsetWidth != overlay.clientWidth) {
+			document.body.classList.add('v--modal-block-is-scrollable');
+		} else {
+			document.body.classList.remove('v--modal-block-is-scrollable');
+		}
         this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height
       }
     },
