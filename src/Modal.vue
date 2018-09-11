@@ -246,7 +246,10 @@ export default {
     if (this.scrollable) {
       document.body.classList.remove('v--modal-block-scroll')
     }
+	//Custom classes / events
 	document.body.classList.remove('v--modal-block-is-scrollable');
+	document.getElementsByClassName('v--modal-overlay')[0].removeEventListener( 'scroll', this.isVisible );
+	document.body.classList.remove('v--modal-computed-block-visible');
   },
   computed: {
     /**
@@ -349,6 +352,23 @@ export default {
     }
   },
   methods: {
+	isVisible(e) {
+		let elem = document.getElementById('v--modal-computed-block');
+		if (elem) {
+			let coords = elem.getBoundingClientRect();
+
+			let windowHeight = document.documentElement.clientHeight;
+			let topVisible = coords.top > 0 && coords.top < windowHeight;
+			let bottomVisible = coords.bottom < windowHeight && coords.bottom > 0;
+
+			if (topVisible || bottomVisible) {
+				document.body.classList.add('v--modal-computed-block-visible');
+			} else {
+				document.body.classList.remove('v--modal-computed-block-visible');
+			}
+			//return topVisible || bottomVisible;
+		}
+	},
     handleToggleEvent (name, state, params) {
       if (this.name === name) {
         const nextState = typeof state === 'undefined'
@@ -506,6 +526,7 @@ export default {
 
       setTimeout(() => {
         this.visibility.modal = true
+		document.getElementsByClassName('v--modal-overlay')[0].addEventListener( 'scroll', this.isVisible );
       }, this.delay)
     },
 

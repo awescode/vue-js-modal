@@ -446,7 +446,9 @@
             beforeDestroy: function() {
                 _index2.default.event.$off("toggle", this.handleToggleEvent), window.removeEventListener("resize", this.handleWindowResize), 
                 this.clickToClose && window.removeEventListener("keyup", this.handleEscapeKeyUp), 
-                this.scrollable && document.body.classList.remove("v--modal-block-scroll"), document.body.classList.remove("v--modal-block-is-scrollable");
+                this.scrollable && document.body.classList.remove("v--modal-block-scroll"), document.body.classList.remove("v--modal-block-is-scrollable"), 
+                document.getElementsByClassName("v--modal-overlay")[0].removeEventListener("scroll", this.isVisible), 
+                document.body.classList.remove("v--modal-computed-block-visible");
             },
             computed: {
                 isAutoHeight: function() {
@@ -488,6 +490,13 @@
                 }
             },
             methods: {
+                isVisible: function(e) {
+                    var elem = document.getElementById("v--modal-computed-block");
+                    if (elem) {
+                        var coords = elem.getBoundingClientRect(), windowHeight = document.documentElement.clientHeight, topVisible = coords.top > 0 && coords.top < windowHeight, bottomVisible = coords.bottom < windowHeight && coords.bottom > 0;
+                        topVisible || bottomVisible ? document.body.classList.add("v--modal-computed-block-visible") : document.body.classList.remove("v--modal-computed-block-visible");
+                    }
+                },
                 handleToggleEvent: function(name, state, params) {
                     if (this.name === name) {
                         var nextState = void 0 === state ? !this.visible : state;
@@ -550,7 +559,7 @@
                 startOpeningModal: function() {
                     var _this2 = this;
                     this.visibility.overlay = !0, setTimeout(function() {
-                        _this2.visibility.modal = !0;
+                        _this2.visibility.modal = !0, document.getElementsByClassName("v--modal-overlay")[0].addEventListener("scroll", _this2.isVisible);
                     }, this.delay);
                 },
                 startClosingModal: function() {
