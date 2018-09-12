@@ -623,7 +623,7 @@ export default {
 	},
 	isScroll() {
 		let el = document.getElementsByClassName('v--modal-overlay')[0];
-		return ( overlay.offsetWidth !== overlay.clientWidth || overlay.offsetHeight !== overlay.clientHeight);
+		return ( el.offsetWidth !== el.clientWidth || el.offsetHeight !== el.clientHeight);
 	},
     updateRenderedHeight () {
       if (this.$refs.modal) {
