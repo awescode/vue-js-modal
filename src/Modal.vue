@@ -352,7 +352,7 @@ export default {
     }
   },
   methods: {
-	isVisible(e) {
+	isVisible() {
 		let elem = document.getElementById('v--modal-computed-block');
 		if (elem) {
 			let coords = elem.getBoundingClientRect();
@@ -362,10 +362,10 @@ export default {
 			let bottomVisible = coords.bottom < windowHeight && coords.bottom > 0;
 
 			if (topVisible || bottomVisible) {
-				elem.firstChild.style.transform = ( this.getScrollOverlay() ) ? 'translateX(-' +this.getScrollOverlay()/2+ 'px)' : '';
+				elem.firstChild.style.transform = '';
 				document.body.classList.add('v--modal-computed-block-visible');
 			} else {
-				elem.firstChild.style.transform = '';
+				elem.firstChild.style.transform = ( this.getScrollOverlay() ) ? 'translateX(-' +this.getScrollOverlay()/2+ 'px)' : '';
 				document.body.classList.remove('v--modal-computed-block-visible');
 			}
 			//return topVisible || bottomVisible;
@@ -628,6 +628,7 @@ export default {
 		} else {
 			document.body.classList.remove('v--modal-block-is-scrollable');
 		}
+		this.isVisible();
         this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height
       }
     },

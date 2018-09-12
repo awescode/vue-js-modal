@@ -427,12 +427,11 @@
                 }
             },
             methods: {
-                isVisible: function(e) {
+                isVisible: function() {
                     var elem = document.getElementById("v--modal-computed-block");
                     if (elem) {
                         var coords = elem.getBoundingClientRect(), windowHeight = document.documentElement.clientHeight, topVisible = coords.top > 0 && coords.top < windowHeight, bottomVisible = coords.bottom < windowHeight && coords.bottom > 0;
-                        topVisible || bottomVisible ? (elem.firstChild.style.transform = this.getScrollOverlay() ? "translateX(-" + this.getScrollOverlay() / 2 + "px)" : "", 
-                        document.body.classList.add("v--modal-computed-block-visible")) : (elem.firstChild.style.transform = "", 
+                        topVisible || bottomVisible ? (elem.firstChild.style.transform = "", document.body.classList.add("v--modal-computed-block-visible")) : (elem.firstChild.style.transform = this.getScrollOverlay() ? "translateX(-" + this.getScrollOverlay() / 2 + "px)" : "", 
                         document.body.classList.remove("v--modal-computed-block-visible"));
                     }
                 },
@@ -542,7 +541,7 @@
                 },
                 updateRenderedHeight: function() {
                     this.$refs.modal && (this.getScrollOverlay() > 0 ? document.body.classList.add("v--modal-block-is-scrollable") : document.body.classList.remove("v--modal-block-is-scrollable"), 
-                    this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height);
+                    this.isVisible(), this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height);
                 },
                 connectObserver: function() {
                     this.mutationObserver && this.mutationObserver.observe(this.$refs.overlay, {
