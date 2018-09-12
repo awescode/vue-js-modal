@@ -539,8 +539,12 @@
                     var overlay = document.getElementsByClassName("v--modal-overlay")[0];
                     return overlay ? overlay.offsetWidth - overlay.clientWidth : null;
                 },
+                isScroll: function() {
+                    document.getElementsByClassName("v--modal-overlay")[0];
+                    return overlay.offsetWidth !== overlay.clientWidth || overlay.offsetHeight !== overlay.clientHeight;
+                },
                 updateRenderedHeight: function() {
-                    this.$refs.modal && (this.getScrollOverlay() > 0 ? document.body.classList.add("v--modal-block-is-scrollable") : document.body.classList.remove("v--modal-block-is-scrollable"), 
+                    this.$refs.modal && (this.isScroll() ? document.body.classList.add("v--modal-block-is-scrollable") : document.body.classList.remove("v--modal-block-is-scrollable"), 
                     this.isVisible(), this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height);
                 },
                 connectObserver: function() {

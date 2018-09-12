@@ -621,9 +621,13 @@ export default {
 		if (overlay) return (overlay.offsetWidth - overlay.clientWidth);
 		return null;
 	},
+	isScroll() {
+		let el = document.getElementsByClassName('v--modal-overlay')[0];
+		return ( overlay.offsetWidth !== overlay.clientWidth || overlay.offsetHeight !== overlay.clientHeight);
+	},
     updateRenderedHeight () {
       if (this.$refs.modal) {
-		if (this.getScrollOverlay() > 0) {
+		if (this.isScroll()) {
 			document.body.classList.add('v--modal-block-is-scrollable');
 		} else {
 			document.body.classList.remove('v--modal-block-is-scrollable');
