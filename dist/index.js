@@ -649,8 +649,8 @@
                     return overlay ? overlay.offsetWidth - overlay.clientWidth : null;
                 },
                 isScroll: function() {
-                    document.getElementsByClassName("v--modal-overlay")[0];
-                    return overlay.offsetWidth !== overlay.clientWidth || overlay.offsetHeight !== overlay.clientHeight;
+                    var el = document.getElementsByClassName("v--modal-overlay")[0];
+                    return el.offsetWidth !== el.clientWidth || el.offsetHeight !== el.clientHeight;
                 },
                 updateRenderedHeight: function() {
                     this.$refs.modal && (this.isScroll() ? document.body.classList.add("v--modal-block-is-scrollable") : document.body.classList.remove("v--modal-block-is-scrollable"), 
