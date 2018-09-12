@@ -362,7 +362,7 @@ export default {
 			let bottomVisible = coords.bottom < windowHeight && coords.bottom > 0;
 
 			if (topVisible || bottomVisible) {
-				elem.firstChild.style.transform = ( getScrollOverlay() ) ? 'translateX(-' +getScrollOverlay()/2+ 'px)' : '';
+				elem.firstChild.style.transform = ( this.getScrollOverlay() ) ? 'translateX(-' +this.getScrollOverlay()/2+ 'px)' : '';
 				document.body.classList.add('v--modal-computed-block-visible');
 			} else {
 				elem.firstChild.style.transform = '';

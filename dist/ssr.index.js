@@ -494,7 +494,7 @@
                     var elem = document.getElementById("v--modal-computed-block");
                     if (elem) {
                         var coords = elem.getBoundingClientRect(), windowHeight = document.documentElement.clientHeight, topVisible = coords.top > 0 && coords.top < windowHeight, bottomVisible = coords.bottom < windowHeight && coords.bottom > 0;
-                        topVisible || bottomVisible ? (elem.firstChild.style.transform = getScrollOverlay() ? "translateX(-" + getScrollOverlay() / 2 + "px)" : "", 
+                        topVisible || bottomVisible ? (elem.firstChild.style.transform = this.getScrollOverlay() ? "translateX(-" + this.getScrollOverlay() / 2 + "px)" : "", 
                         document.body.classList.add("v--modal-computed-block-visible")) : (elem.firstChild.style.transform = "", 
                         document.body.classList.remove("v--modal-computed-block-visible"));
                     }
