@@ -362,8 +362,10 @@ export default {
 			let bottomVisible = coords.bottom < windowHeight && coords.bottom > 0;
 
 			if (topVisible || bottomVisible) {
+				elem.firstChild.style.transform = ( getScrollOverlay() ) ? 'translateX(-' +getScrollOverlay()/2+ 'px)' : '';
 				document.body.classList.add('v--modal-computed-block-visible');
 			} else {
+				elem.firstChild.style.transform = '';
 				document.body.classList.remove('v--modal-computed-block-visible');
 			}
 			//return topVisible || bottomVisible;
@@ -614,10 +616,14 @@ export default {
      * 1. modal opened
      * 2. MutationObserver's observe callback
      */
+	getScrollOverlay() {
+		let overlay = document.getElementsByClassName('v--modal-overlay')[0];
+		if (overlay) return (overlay.offsetWidth - overlay.clientWidth);
+		return null;
+	},
     updateRenderedHeight () {
       if (this.$refs.modal) {
-		let overlay = document.getElementsByClassName('v--modal-overlay')[0];
-		if (overlay && overlay.offsetWidth != overlay.clientWidth) {
+		if (this.getScrollOverlay() > 0) {
 			document.body.classList.add('v--modal-block-is-scrollable');
 		} else {
 			document.body.classList.remove('v--modal-block-is-scrollable');
