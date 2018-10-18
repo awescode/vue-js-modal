@@ -608,7 +608,7 @@
                 },
                 updateRenderedHeight: function() {
                     this.$refs.modal && (this.isScroll() ? document.body.classList.add("v--modal-block-is-scrollable") : document.body.classList.remove("v--modal-block-is-scrollable"), 
-                    this.isVisible(), this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height);
+                    this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height);
                 },
                 connectObserver: function() {
                     this.mutationObserver && this.mutationObserver.observe(this.$refs.overlay, {

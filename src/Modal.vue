@@ -365,7 +365,7 @@ export default {
 				elem.firstChild.style.transform = '';
 				document.body.classList.add('v--modal-computed-block-visible');
 			} else {
-				elem.firstChild.style.transform = ( this.getScrollOverlay() ) ? 'translateX(-' +this.getScrollOverlay()/2+ 'px)' : '';
+				//elem.firstChild.style.transform = ( this.getScrollOverlay() ) ? 'translateX(-' +this.getScrollOverlay()/2+ 'px)' : '';
 				document.body.classList.remove('v--modal-computed-block-visible');
 			}
 			//return topVisible || bottomVisible;
